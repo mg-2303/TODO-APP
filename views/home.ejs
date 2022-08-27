@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/style.css">
+        <!-- <script src="https://kit.fontawesome.com/f3d3bcd31b.js" crossorigin="anonymous"></script> -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <h1>TODO App</h1>
+        <hr>
+        <form action="/add-task/" method="post">
+            <div>
+                <label for="task"> DESCRIPTION </label> <br>
+                <input type="text" style="width: 100%;" name="task" placeholder="What do you need to do?">
+            </div>
+            <hr>
+            <div class="flex">
+                <div style="width: 60%;">
+                    <label for="category">CATAGORY</label> <br>
+                    <select name="category" id="drop-down" required>
+                        <option value="">Choose a category</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="School">School</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="date">
+                    <label for="date">DUE DATE</label> <br>
+                    <input type="date" name="date">
+                </div>
+            </div>
+            <hr>
+            <div class="submit">
+                <button type="submit" class="btn"> <i class="fa fa-plus" aria-hidden="true"></i> ADD TASK</button>
+            </div>
+        </form>
+        <div id="list">
+            <ul>
+                <form action="/delete-task/" method="GET">
+                    <% for(let i of tasks) {%>
+                        <li style="display: flex; justify-content: space-between;">
+                            <div>
+                                <span id="checkbox-container">
+                                    <input id="check" type="checkbox" name="<%= i._id %>">
+                                </span>
+                                <div style="display: inline-block;">
+                                    <span id="list-task">
+                                        <%= i.task %>
+                                    </span> <br>
+                                    <span id="list-date"><i class="fa fa-calendar" aria-hidden="true"></i><span
+                                            id="task-date-value">
+                                            <%= i.date %>
+                                        </span></span>
+                                </div>
+                            </div>
+                            <div class="list-category">
+                                <p id="category-box-text">
+                                    <%= i.category %>
+                                </p>
+                            </div>
+                        </li>
+                        <hr>
+                        <% } %>
+                            <div style="text-align:center;">
+                                <button class="btn" type="submit" style="background-color: orangered;"><i
+                                        class="fa fa-trash" aria-hidden="true"></i>
+                                    DELETE TASK</button>
+                            </div>
+                </form>
+            </ul>
+        </div>
+        <script src="./js/script.js"></script>
+    </body>
+
+</html>
